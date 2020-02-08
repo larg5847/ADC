@@ -10,6 +10,7 @@ public class VirusSpawner : MonoBehaviour
     float tiempo = 0f;
     //Objeto para hacer el pool
     public GameObject virus;
+    public GameObject CelulaBuena;
     //Lista de objetos
     List<GameObject> lVirus;
     //Tamaño de lista de pool
