@@ -13,15 +13,11 @@ public class movimientoJugador : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(Input.acceleration.x * Time.deltaTime,0,0);
+        moverJugador();   
+    }
 
-        if(Input.GetKeyDown(KeyCode.A))
-        {
-            transform.Translate(transform.position.x * 3 * Time.deltaTime, 0, 0);
-        }
-        if (Input.GetKeyDown(KeyCode.D))
-        {
-            transform.Translate(-transform.position.x * 3 * Time.deltaTime, 0, 0);
-        }
+    void moverJugador()
+    {
+        transform.Translate(Input.acceleration.x + 3 * Time.deltaTime, 0, 0);
     }
 }
