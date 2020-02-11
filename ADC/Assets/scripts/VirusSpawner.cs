@@ -10,7 +10,16 @@ public class VirusSpawner : MonoBehaviour
     float tiempo = 0f;
     //Objeto para hacer el pool
     public GameObject virus;
+
+
+
+    //aditamento para las celulas que no
     public GameObject CelulaBuena;
+    
+    
+    
+    
+    
     //Lista de objetos
     List<GameObject> lVirus;
     //Tamaño de lista de pool
@@ -37,9 +46,33 @@ public class VirusSpawner : MonoBehaviour
         //Creación de la lista de objetos
         for (int i = 0; i < poolTam; i++)
         {
+
+
             GameObject obj = (GameObject)Instantiate(virus);
             obj.SetActive(false);
             lVirus.Add(obj);
+
+
+            /*switch (Random.Range(0,2))
+            {
+                case 0:
+                    {
+                        GameObject obj = (GameObject)Instantiate(virus);
+                        obj.SetActive(false);
+                        lVirus.Add(obj);
+                        break;
+                    }
+                case 1:
+                    {
+                        GameObject obj = (GameObject)Instantiate(CelulaBuena);
+                        obj.SetActive(false);
+                        lVirus.Add(obj);
+                        break;
+                    }
+            }*/
+
+
+            
         }
     }
     
@@ -88,12 +121,18 @@ public class VirusSpawner : MonoBehaviour
             tiempo = 0f;
             
             tVirus = GameObject.FindGameObjectsWithTag("Virus");
-
+            //tVirus = GameObject.FindGameObjectsWithTag("MonocitoCaida");
             //Reinicia el iterador para comenzar nuevamente el pool
             if (tVirus.Length == 0)
             {
                 i = 0;
             }
+
+            /*tVirus = GameObject.FindGameObjectsWithTag("MonocitoCaida");
+            if (tVirus.Length == 0)
+            {
+                i = 0;
+            }*/
         }
     }
 }

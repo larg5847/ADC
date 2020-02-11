@@ -60,7 +60,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\imports\cambioEscenas.cs" />
+    <Compile Include="Assets\imports\TimeCounter.cs" />
+    <Compile Include="Assets\imports\uicontrol\ControlJuego.cs" />
     <Compile Include="Assets\scripts\CelulasBuenasComportamiento.cs" />
+    <Compile Include="Assets\scripts\Cronometro.cs" />
     <Compile Include="Assets\scripts\DestruyeVirus.cs" />
     <Compile Include="Assets\scripts\MonocitoComportamiento.cs" />
     <Compile Include="Assets\scripts\movimientoJugador.cs" />

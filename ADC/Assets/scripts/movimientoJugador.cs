@@ -13,7 +13,12 @@ public class movimientoJugador : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        moverJugador();   
+        //moverJugador();   
+    }
+
+    private void FixedUpdate()
+    {
+        moverJugador();
     }
 
     void moverJugador()

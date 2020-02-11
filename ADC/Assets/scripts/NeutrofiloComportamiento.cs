@@ -22,7 +22,7 @@ public class NeutrofiloComportamiento : CelulasBuenasComportamiento
         if(collision.gameObject.tag=="Virus")
         {
             puntaje += 1;
-            Score.text = Score.text + " " + puntaje;
+            Score.text = "Puntaje: " + puntaje.ToString();
         }
     }
 
