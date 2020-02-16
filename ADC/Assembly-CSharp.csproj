@@ -69,6 +69,7 @@
     <Compile Include="Assets\scripts\MonocitoComportamiento.cs" />
     <Compile Include="Assets\scripts\movimientoJugador.cs" />
     <Compile Include="Assets\scripts\NeutrofiloComportamiento.cs" />
+    <Compile Include="Assets\scripts\scriptsPrototipos\multiItemPools.cs" />
     <Compile Include="Assets\scripts\VirusSpawner.cs" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>C:/Users/larg/Desktop/adc/ADC/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>

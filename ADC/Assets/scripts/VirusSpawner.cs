@@ -10,16 +10,6 @@ public class VirusSpawner : MonoBehaviour
     float tiempo = 0f;
     //Objeto para hacer el pool
     public GameObject virus;
-
-
-
-    //aditamento para las celulas que no
-    public GameObject CelulaBuena;
-    
-    
-    
-    
-    
     //Lista de objetos
     List<GameObject> lVirus;
     //Tamaño de lista de pool
@@ -34,7 +24,7 @@ public class VirusSpawner : MonoBehaviour
     //Distancia entre los tres puntos de aparición de virus
     public const float DIST_VIRUS = 1.7f;
     //Variable para selección de carril de virus
-    public int j;
+    int j,k;
     
     void Start()
     {
@@ -42,37 +32,19 @@ public class VirusSpawner : MonoBehaviour
         posicionY = transform.position.y;
 
         lVirus = new List<GameObject>();
+        //celBuenas = new List<GameObject>();
+
 
         //Creación de la lista de objetos
         for (int i = 0; i < poolTam; i++)
         {
-
-
             GameObject obj = (GameObject)Instantiate(virus);
             obj.SetActive(false);
             lVirus.Add(obj);
 
-
-            /*switch (Random.Range(0,2))
-            {
-                case 0:
-                    {
-                        GameObject obj = (GameObject)Instantiate(virus);
-                        obj.SetActive(false);
-                        lVirus.Add(obj);
-                        break;
-                    }
-                case 1:
-                    {
-                        GameObject obj = (GameObject)Instantiate(CelulaBuena);
-                        obj.SetActive(false);
-                        lVirus.Add(obj);
-                        break;
-                    }
-            }*/
-
-
-            
+            //obj = (GameObject)Instantiate(CelulaBuena);
+            //obj.SetActive(false);
+            //celBuenas.Add(obj);
         }
     }
     
@@ -119,20 +91,13 @@ public class VirusSpawner : MonoBehaviour
         else if (tiempo > spawnRate)
         {
             tiempo = 0f;
-            
             tVirus = GameObject.FindGameObjectsWithTag("Virus");
-            //tVirus = GameObject.FindGameObjectsWithTag("MonocitoCaida");
             //Reinicia el iterador para comenzar nuevamente el pool
             if (tVirus.Length == 0)
             {
                 i = 0;
             }
-
-            /*tVirus = GameObject.FindGameObjectsWithTag("MonocitoCaida");
-            if (tVirus.Length == 0)
-            {
-                i = 0;
-            }*/
+            
         }
     }
 }

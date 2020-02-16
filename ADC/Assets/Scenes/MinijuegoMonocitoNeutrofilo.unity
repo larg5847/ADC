@@ -360,6 +360,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1073869918 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5335611562450321285, guid: c8f56791f37162f4ba48b411516dc5ad,
+    type: 3}
+  m_PrefabInstance: {fileID: 5335611561408525759}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1160573538
 GameObject:
   m_ObjectHideFlags: 0
@@ -580,6 +586,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5387304435519257532, guid: 624b6c518bb78bf4bb18f2bbf92e729d,
         type: 3}
+      propertyPath: tVirus.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5387304435519257532, guid: 624b6c518bb78bf4bb18f2bbf92e729d,
+        type: 3}
       propertyPath: virus
       value: 
       objectReference: {fileID: 5751482509960975320, guid: 6bcdbdf078d90a94f82be29cbf78345e,
@@ -595,8 +606,19 @@ PrefabInstance:
       propertyPath: m_Name
       value: VirusPool
       objectReference: {fileID: 0}
+    - target: {fileID: 6520039948516318494, guid: 624b6c518bb78bf4bb18f2bbf92e729d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 624b6c518bb78bf4bb18f2bbf92e729d, type: 3}
+--- !u!1 &1528225675 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5335611562613434363, guid: c8f56791f37162f4ba48b411516dc5ad,
+    type: 3}
+  m_PrefabInstance: {fileID: 5335611561408525759}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1578548435
 GameObject:
   m_ObjectHideFlags: 0
@@ -761,6 +783,53 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cdfedc47989ef264886d402b8ba1dfa3, type: 3}
+--- !u!1 &1960872187
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1960872189}
+  - component: {fileID: 1960872188}
+  m_Layer: 0
+  m_Name: Intento
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1960872188
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1960872187}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d320c1079d280743aee481aaf0c8dd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabs:
+  - {fileID: 1528225675}
+  - {fileID: 1073869918}
+  - {fileID: 5335611561408525760}
+--- !u!4 &1960872189
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1960872187}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -9.52, y: 15, z: -0.028851707}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &836807496940760692
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -836,7 +905,7 @@ PrefabInstance:
     - target: {fileID: 836807497706655431, guid: cdfedc47989ef264886d402b8ba1dfa3,
         type: 3}
       propertyPath: m_UsedByComposite
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cdfedc47989ef264886d402b8ba1dfa3, type: 3}
