@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/MinijuegoMonocitoNeutrofilo.unity
+- path: Assets/Scenes/SeleccionMinijuego.unity
   isLoaded: 1
   isActive: 1
