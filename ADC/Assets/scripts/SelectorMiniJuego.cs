@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class SelectorMiniJuego : MonoBehaviour
 {
-    public SceneFader fader;
+    SceneFader fader;
 
     public void Seleccion (string nombreMiniJuego)
     {
+        fader = gameObject.GetComponentInParent<SceneFader>();
         fader.FadeTo(nombreMiniJuego);
     }
 }

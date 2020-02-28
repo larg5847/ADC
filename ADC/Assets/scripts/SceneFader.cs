@@ -6,7 +6,6 @@ using UnityEngine;
 
 public class SceneFader : MonoBehaviour
 {
-
     //public Image img;
     //public AnimationCurve curva;
 
