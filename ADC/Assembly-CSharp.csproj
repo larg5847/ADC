@@ -63,6 +63,9 @@
     <Compile Include="Assets\imports\cambioEscenas.cs" />
     <Compile Include="Assets\imports\TimeCounter.cs" />
     <Compile Include="Assets\imports\uicontrol\ControlJuego.cs" />
+    <Compile Include="Assets\Match-3\BackgroundTile.cs" />
+    <Compile Include="Assets\Match-3\Celula.cs" />
+    <Compile Include="Assets\Match-3\Tablero.cs" />
     <Compile Include="Assets\scripts\CelulasBuenasComportamiento.cs" />
     <Compile Include="Assets\scripts\Cronometro.cs" />
     <Compile Include="Assets\scripts\DestruyeVirus.cs" />
