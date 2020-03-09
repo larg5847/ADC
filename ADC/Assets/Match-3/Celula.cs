@@ -6,6 +6,8 @@ public class Celula : MonoBehaviour
 {
     public int fila;
     public int columna;
+    public int filaAnterior;
+    public int columnaAnterior;
     public int posX;
     public int posY;
     Tablero tablero;
@@ -16,6 +18,9 @@ public class Celula : MonoBehaviour
     Vector2 posicionFinal;
     Vector2 posicionTemp;
     public float anguloDeslizamiento;
+
+    //Variable para saber si hizo match
+    public bool matched = false;
 
     private void Start()
     {
@@ -28,12 +33,22 @@ public class Celula : MonoBehaviour
 
         columna = posX;
         fila = posY;
+        columnaAnterior = columna;
+        filaAnterior = fila;
     }
     
     private void Update()
     {
         posX = columna;
         posY = fila;
+
+        encuentraMatches();
+
+        if (matched)
+        {
+            SpriteRenderer sprite = GetComponent<SpriteRenderer>();
+            sprite.color = new Color(0f, 0f, 0f, 0.2f);
+        }
 
         //Mueve X
         if(Mathf.Abs(posX - transform.position.x) > 0.1)
@@ -63,6 +78,25 @@ public class Celula : MonoBehaviour
             posicionTemp = new Vector2(transform.position.x, posY);
             transform.position = posicionTemp;
             tablero.tCelulas[columna, fila] = this.gameObject;
+        }
+    }
+
+    //Corutina que checa si no se hizo match, regresa las células 
+    //a su posición original
+    public IEnumerator verificaMatch()
+    {
+        yield return new WaitForSeconds(0.5f);
+
+        if(celula != null)
+        {
+            if(!matched && !celula.GetComponent<Celula>().matched)
+            {
+                celula.GetComponent<Celula>().fila = fila;
+                celula.GetComponent<Celula>().columna = columna;
+                fila = filaAnterior;
+                columna = columnaAnterior;
+            }
+            celula = null;
         }
     }
 
@@ -96,7 +130,7 @@ public class Celula : MonoBehaviour
     private void mueveCelulas()
     {
         //Deslizamiento derecha
-        if (anguloDeslizamiento > -15 && anguloDeslizamiento <= 15 && columna < tablero._ancho)
+        if (anguloDeslizamiento > -15 && anguloDeslizamiento <= 15 && columna < tablero._ancho - 1)
         {
             celula = tablero.tCelulas[columna + 1, fila];
             celula.GetComponent<Celula>().columna -= 1;
@@ -104,7 +138,7 @@ public class Celula : MonoBehaviour
         }
 
         //Deslizamiento izquierda
-        else if (anguloDeslizamiento > 150 || anguloDeslizamiento <= -150 && columna > 0)
+        else if ((anguloDeslizamiento > 150 || anguloDeslizamiento <= -150) && columna > 0)
         {
             celula = tablero.tCelulas[columna - 1, fila];
             celula.GetComponent<Celula>().columna += 1;
@@ -112,7 +146,7 @@ public class Celula : MonoBehaviour
         }
 
         //Deslizamiento arriba
-        else if (anguloDeslizamiento > 60 && anguloDeslizamiento <= 115 && fila < tablero._alto)
+        else if (anguloDeslizamiento > 60 && anguloDeslizamiento <= 115 && fila < tablero._alto - 1)
         {
             celula = tablero.tCelulas[columna, fila + 1];
             celula.GetComponent<Celula>().fila -= 1;
@@ -125,6 +159,39 @@ public class Celula : MonoBehaviour
             celula = tablero.tCelulas[columna, fila - 1];
             celula.GetComponent<Celula>().fila += 1;
             fila -= 1;
+        }
+
+        StartCoroutine(verificaMatch());
+    }
+
+    void encuentraMatches()
+    {
+        if(columna > 0 && columna < tablero.ancho - 1)
+        {
+            //Células a los lados izquierda y derecha
+            GameObject celulaIzq = tablero.tCelulas[columna - 1, fila];
+            GameObject celulaDer = tablero.tCelulas[columna + 1, fila];
+            
+            if(celulaIzq.tag == this.gameObject.tag && celulaDer.tag == this.gameObject.tag)
+            {
+                celulaIzq.GetComponent<Celula>().matched = true;
+                celulaDer.GetComponent<Celula>().matched = true;
+                matched = true;
+            }
+        }
+
+        if(fila > 0 && fila < tablero.alto - 1)
+        {
+            //Células a los lados arriba y abajo
+            GameObject celulaArr = tablero.tCelulas[columna, fila + 1];
+            GameObject celulaAba = tablero.tCelulas[columna, fila - 1];
+
+            if (celulaArr.tag == this.gameObject.tag && celulaAba.tag == this.gameObject.tag)
+            {
+                celulaArr.GetComponent<Celula>().matched = true;
+                celulaAba.GetComponent<Celula>().matched = true;
+                matched = true;
+            }
         }
     }
 }

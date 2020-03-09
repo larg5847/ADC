@@ -21,6 +21,7 @@ public class Tablero : MonoBehaviour
 
     private void Start()
     {
+
         tCelulas = new GameObject[ancho, alto];
 
         for(int i = 0; i < ancho; i++)
@@ -32,7 +33,7 @@ public class Tablero : MonoBehaviour
                 //Selección al azar de la célula del arreglo celulas
                 int indiceCelula = Random.Range(0, celulas.Length);
                 GameObject backgroundTile = Instantiate(tilePrefab, posicion, Quaternion.identity) as GameObject;
-                GameObject celula = Instantiate(celulas[indiceCelula], posicion, Quaternion.identity) as GameObject;
+                GameObject celula = Instantiate(celulas[indiceCelula], posicion, Quaternion.identity);
 
                 //Para instanciar los tiles como hijos de Tablero
                 backgroundTile.transform.parent = this.transform;
@@ -41,6 +42,8 @@ public class Tablero : MonoBehaviour
                 //Para instanciar las células como hijos de Tablero
                 celula.transform.parent = this.transform;
                 celula.name = "(" + i + "," + j + ")";
+
+                tCelulas[i, j] = celula;
             }
         }
     }

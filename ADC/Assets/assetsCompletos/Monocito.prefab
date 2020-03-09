@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 6050353416232637806}
   - component: {fileID: 9092907134686213695}
   - component: {fileID: 7880846598885507280}
-  - component: {fileID: 114749271653764852}
   m_Layer: 0
   m_Name: Monocito
   m_TagString: Monocito
@@ -139,20 +138,3 @@ Rigidbody2D:
   m_SleepingMode: 0
   m_CollisionDetection: 1
   m_Constraints: 0
---- !u!114 &114749271653764852
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6050353416232637807}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 195a7eb5df9ce844abacd873406dd657, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fila: 0
-  columna: 0
-  posX: 0
-  posY: 0
-  anguloDeslizamiento: 0
