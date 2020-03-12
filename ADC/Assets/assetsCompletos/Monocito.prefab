@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6050353416232637804}
   - component: {fileID: 6050353416232637805}
   - component: {fileID: 6050353416232637806}
+  - component: {fileID: 114662389963097182}
   - component: {fileID: 9092907134686213695}
   - component: {fileID: 7880846598885507280}
   m_Layer: 0
@@ -101,6 +102,26 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &114662389963097182
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6050353416232637807}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 195a7eb5df9ce844abacd873406dd657, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fila: 0
+  columna: 0
+  filaAnterior: 0
+  columnaAnterior: 0
+  posX: 0
+  posY: 0
+  anguloDeslizamiento: 0
+  matched: 0
 --- !u!58 &9092907134686213695
 CircleCollider2D:
   m_ObjectHideFlags: 0

@@ -146,9 +146,8 @@ MonoBehaviour:
   tilePrefab: {fileID: 1443273526674174276, guid: aad5dfbc9eb287f4b886367e014d7f5f,
     type: 3}
   celulas:
-  - {fileID: 4990371722722186152, guid: 1a41d01af25c9444cadcf14cc3019152, type: 3}
-  - {fileID: 27364323503731212, guid: d04464884298d0a46ad97584860ec55f, type: 3}
-  - {fileID: 7588634128546833352, guid: 75cbadcbc3c13584ab17ce923f792ad9, type: 3}
+  - {fileID: 6050353416232637807, guid: ccf0a1fc4cd937246ba14a7678702a12, type: 3}
+  - {fileID: 2941478715189247493, guid: dd78544f784180446b0fd9485d8a38c3, type: 3}
 --- !u!4 &1645103848
 Transform:
   m_ObjectHideFlags: 0
