@@ -13,6 +13,9 @@ public class Tablero : MonoBehaviour
     //Arreglo bidimensional para posición de células
     public GameObject[,] tCelulas;
 
+    //
+    BackgroundTile[,] tTiles;
+
     public Tablero(int _alto, int _ancho)
     {
         _alto = this.alto;
@@ -21,7 +24,8 @@ public class Tablero : MonoBehaviour
 
     private void Start()
     {
-
+        //
+        tTiles = new BackgroundTile[ancho, alto];
         tCelulas = new GameObject[ancho, alto];
 
         for(int i = 0; i < ancho; i++)
@@ -33,12 +37,12 @@ public class Tablero : MonoBehaviour
                 //Selección al azar de la célula del arreglo celulas
                 int indiceCelula = Random.Range(0, celulas.Length);
                 int iteraciones = 0;
-
+                
                 //Iteración que cambia la célula a poner para que no exista
                 //match en el tablero al momento de llenarlo
                 //Máximo de 100 iteraciones para que no entre en un loop
                 //infinito
-                while(matches(i, j, celulas[indiceCelula]) && iteraciones < 100)
+                while (matches(i, j, celulas[indiceCelula]) && iteraciones < 100)
                 {
                     indiceCelula = Random.Range(0, celulas.Length);
                     iteraciones++;
