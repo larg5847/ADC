@@ -148,6 +148,7 @@ MonoBehaviour:
   celulas:
   - {fileID: 6050353416232637807, guid: ccf0a1fc4cd937246ba14a7678702a12, type: 3}
   - {fileID: 2941478715189247493, guid: dd78544f784180446b0fd9485d8a38c3, type: 3}
+  - {fileID: 5751482509960975320, guid: 6bcdbdf078d90a94f82be29cbf78345e, type: 3}
 --- !u!4 &1645103848
 Transform:
   m_ObjectHideFlags: 0

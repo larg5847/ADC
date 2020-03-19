@@ -49,6 +49,9 @@ public class GameManager : MonoBehaviour
             case "MinijuegoMonocitoNeutrofilo":
                 virus.GetComponent<DestruyeVirus>().enabled = true;
                 virus.GetComponent<Celula>().enabled = false;
+                virus.GetComponent<Rigidbody2D>().gravityScale = 0.2f;
+                virus.GetComponent<Rigidbody2D>().collisionDetectionMode = CollisionDetectionMode2D.Discrete;
+                virus.GetComponent<CircleCollider2D>().isTrigger = true;
                 monocito.GetComponent<Celula>().enabled = false;
                 neutrofilo.GetComponent<Celula>().enabled = false;
                 neutrofilo.GetComponent<NeutrofiloComportamiento>().enabled = true;
@@ -57,6 +60,9 @@ public class GameManager : MonoBehaviour
             case "Match-3":
                 virus.GetComponent<DestruyeVirus>().enabled = false;
                 virus.GetComponent<Celula>().enabled = true;
+                virus.GetComponent<Rigidbody2D>().gravityScale = 0.0f;
+                virus.GetComponent<Rigidbody2D>().collisionDetectionMode = CollisionDetectionMode2D.Continuous;
+                virus.GetComponent<CircleCollider2D>().isTrigger = false;
                 monocito.GetComponent<Celula>().enabled = true;
                 neutrofilo.GetComponent<Celula>().enabled = true;
                 neutrofilo.GetComponent<NeutrofiloComportamiento>().enabled = false;

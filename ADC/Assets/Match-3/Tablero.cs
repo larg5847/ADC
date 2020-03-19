@@ -28,6 +28,12 @@ public class Tablero : MonoBehaviour
         tTiles = new BackgroundTile[ancho, alto];
         tCelulas = new GameObject[ancho, alto];
 
+        llenaTablero();
+    }
+
+    //Inicializa el tablero llenando cada posición con una célula
+    private void llenaTablero()
+    {
         for (int i = 0; i < ancho; i++)
         {
             for (int j = 0; j < alto; j++)
@@ -154,6 +160,62 @@ public class Tablero : MonoBehaviour
         }
         yield return new WaitForSeconds(0.4f);
 
+        StartCoroutine(rellenaTableroCo());
+    }
+
+    //Realiza lo mismo que cuando se llena por primera vez el tablero,
+    //aquí no importa si se realiza el match con la aparición de las
+    //nuevas células
+    private void rellenaTablero()
+    {
+        for(int i = 0; i < ancho; i++)
+        {
+            for(int j = 0; j < alto; j++)
+            {
+                if (tCelulas[i, j] == null)
+                {
+                    Vector2 posicion = new Vector2(i, j);
+                    int indiceCelula = Random.Range(0, celulas.Length);
+                    GameObject celula = Instantiate(celulas[indiceCelula], posicion, Quaternion.identity);
+
+                    celula.transform.parent = this.transform;
+                    celula.name = "(" + i + "," + j + ")";
+                    tCelulas[i, j] = celula;
+                }
+            }
+        }
+    }
+
+    //Función auxiliar que sirve si existe match una vez que descienden
+    //las células, retorna un 1 si hay match
+    private bool matchesActual()
+    {
+        for(int i = 0; i < ancho; i++)
+        {
+            for(int j = 0; j < alto; j++)
+            {
+                if(tCelulas[i, j] != null)
+                {
+                    if (tCelulas[i, j].GetComponent<Celula>().matched)
+                        return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    //Corutina para rellenar tablero y verificar si existe matches
+    //para destruir las células
+    private IEnumerator rellenaTableroCo()
+    {
+        rellenaTablero();
+        yield return new WaitForSeconds(0.5f);
+
+        while(matchesActual())
+        {
+            yield return new WaitForSeconds(0.5f);
+            destruyeMatches();
+        }
     }
 
     public int _alto
