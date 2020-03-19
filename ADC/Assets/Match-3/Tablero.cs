@@ -28,16 +28,16 @@ public class Tablero : MonoBehaviour
         tTiles = new BackgroundTile[ancho, alto];
         tCelulas = new GameObject[ancho, alto];
 
-        for(int i = 0; i < ancho; i++)
+        for (int i = 0; i < ancho; i++)
         {
-            for(int j = 0; j < alto; j++)
+            for (int j = 0; j < alto; j++)
             {
                 //Posición en la malla
                 Vector2 posicion = new Vector2(i, j);
                 //Selección al azar de la célula del arreglo celulas
                 int indiceCelula = Random.Range(0, celulas.Length);
                 int iteraciones = 0;
-                
+
                 //Iteración que cambia la célula a poner para que no exista
                 //match en el tablero al momento de llenarlo
                 //Máximo de 100 iteraciones para que no entre en un loop
@@ -54,7 +54,7 @@ public class Tablero : MonoBehaviour
                 //Para instanciar los tiles como hijos de Tablero
                 backgroundTile.transform.parent = this.transform;
                 backgroundTile.name = "(" + i + "," + j + ")";
-     
+
                 //Para instanciar las células como hijos de Tablero
                 celula.transform.parent = this.transform;
                 celula.name = "(" + i + "," + j + ")";
@@ -81,7 +81,7 @@ public class Tablero : MonoBehaviour
         }
 
         //Comparación para casos de la primera o segunda fila o columna 
-        else if(columna <= 1 || fila <=1)
+        else if (columna <= 1 || fila <= 1)
         {
             if (columna > 1)
             {
@@ -100,6 +100,29 @@ public class Tablero : MonoBehaviour
         return false;
     }
 
+    //Función que destruye la célula que hizo match
+    private void destruyeMatches(int columna, int fila)
+    {
+        if (tCelulas[columna, fila].GetComponent<Celula>().matched)
+        {
+            Destroy(tCelulas[columna, fila]);
+            tCelulas[columna, fila] = null;
+        }
+    }
+
+    //Función que destruye todos los matches del tablero
+    public void destruyeMatches()
+    {
+        for (int i = 0; i < ancho; i++)
+        {
+            for (int j = 0; j < alto; j++)
+            {
+                if (tCelulas[i, j] != null)
+                    destruyeMatches(i, j);
+            }
+        }
+    }
+
     public int _alto
     {
         get => alto;
@@ -112,3 +135,4 @@ public class Tablero : MonoBehaviour
         set { alto = value; }
     }
 }
+

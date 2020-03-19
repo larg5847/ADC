@@ -39,7 +39,7 @@ public class Celula : MonoBehaviour
         columnaAnterior = columna;
         filaAnterior = fila;
     }
-    
+
     private void Update()
     {
         encuentraMatches();
@@ -52,9 +52,9 @@ public class Celula : MonoBehaviour
 
         posX = columna;
         posY = fila;
-        
+
         //Mueve X
-        if(Mathf.Abs(posX - transform.position.x) > 0.1)
+        if (Mathf.Abs(posX - transform.position.x) > 0.1)
         {
             posicionTemp = new Vector2(posX, transform.position.y);
             //Interpola
@@ -84,15 +84,15 @@ public class Celula : MonoBehaviour
         }
     }
 
-    //Corutina que checa si no se hizo match, regresa las células 
-    //a su posición original
+    //Corutina que checa si se hizo match
     public IEnumerator verificaMatch()
     {
         yield return new WaitForSeconds(0.5f);
 
-        if(celula != null)
+        if (celula != null)
         {
-            if(!matched && !celula.GetComponent<Celula>().matched)
+            //Si no hay match regresa las células a su posición anterior
+            if (!matched && !celula.GetComponent<Celula>().matched)
             {
                 //La célula de un lado retoma su fila y columna original
                 celula.GetComponent<Celula>().fila = fila;
@@ -102,6 +102,10 @@ public class Celula : MonoBehaviour
                 fila = filaAnterior;
                 columna = columnaAnterior;
             }
+
+            else
+                tablero.destruyeMatches();
+
             celula = null;
         }
     }
@@ -183,12 +187,12 @@ public class Celula : MonoBehaviour
     //esto lo hace comparando por medio de etiquetas
     private void encuentraMatches()
     {
-        if(columna > 0 && columna < tablero.ancho - 1)
+        if (columna > 0 && columna < tablero.ancho - 1)
         {
             //Células a los lados izquierda y derecha
             GameObject celulaIzq = tablero.tCelulas[columna - 1, fila];
             GameObject celulaDer = tablero.tCelulas[columna + 1, fila];
-            
+
             //Checa que las células de alrededor no estén vacías
             if (celulaIzq != null && celulaDer != null)
             {
@@ -199,10 +203,10 @@ public class Celula : MonoBehaviour
                     matched = true;
                 }
             }
-            
+
         }
 
-        if(fila > 0 && fila < tablero.alto - 1)
+        if (fila > 0 && fila < tablero.alto - 1)
         {
             //Células a los lados arriba y abajo
             GameObject celulaArr = tablero.tCelulas[columna, fila + 1];
