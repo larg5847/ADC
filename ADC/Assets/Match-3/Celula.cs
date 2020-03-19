@@ -59,13 +59,16 @@ public class Celula : MonoBehaviour
             posicionTemp = new Vector2(posX, transform.position.y);
             //Interpola
             transform.position = Vector2.Lerp(transform.position, posicionTemp, 0.4f);
+
+            //Actualiza el objeto una vez que desciende la célula
+            if (tablero.tCelulas[columna, fila] != this.gameObject)
+                tablero.tCelulas[columna, fila] = this.gameObject;
         }
 
         else
         {
             posicionTemp = new Vector2(posX, transform.position.y);
             transform.position = posicionTemp;
-            tablero.tCelulas[columna, fila] = this.gameObject;
         }
 
         //Mueve Y
@@ -74,13 +77,16 @@ public class Celula : MonoBehaviour
             posicionTemp = new Vector2(transform.position.x, posY);
             //Interpola
             transform.position = Vector2.Lerp(transform.position, posicionTemp, 0.4f);
+
+            //Actualiza el objeto una vez que desciende la célula
+            if (tablero.tCelulas[columna, fila] != this.gameObject)
+                tablero.tCelulas[columna, fila] = this.gameObject;
         }
 
         else
         {
             posicionTemp = new Vector2(transform.position.x, posY);
             transform.position = posicionTemp;
-            tablero.tCelulas[columna, fila] = this.gameObject;
         }
     }
 

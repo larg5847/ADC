@@ -121,6 +121,39 @@ public class Tablero : MonoBehaviour
                     destruyeMatches(i, j);
             }
         }
+
+        StartCoroutine(disminuyeFila());
+    }
+
+    //Corutina que verifica si hay espacios libres entre filas para
+    //hacer que desciendan las células
+    public IEnumerator disminuyeFila()
+    {
+        //Contador para los objetos nulos
+        int contadorNull = 0;
+        for (int i = 0; i < ancho; i++)
+        {
+            for (int j = 0; j < alto; j++)
+            {
+                if (tCelulas[i, j] == null)
+                    contadorNull++;
+
+                else if (contadorNull > 0)
+                {
+                    //Actualiza el valor de la fila y el de la fila anterior
+                    tCelulas[i, j].GetComponent<Celula>().fila -= contadorNull;
+                    tCelulas[i, j].GetComponent<Celula>().filaAnterior =
+                        tCelulas[i, j].GetComponent<Celula>().fila;
+                    //Y ahora lo que viene siendo su posición anterior se tiene
+                    //un objeto vacío
+                    tCelulas[i, j] = null;
+                }
+            }
+
+            contadorNull = 0;
+        }
+        yield return new WaitForSeconds(0.4f);
+
     }
 
     public int _alto
