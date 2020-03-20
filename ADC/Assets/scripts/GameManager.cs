@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 //Script que activa/desactiva otros scripts de los prefabs, 
 //dependiendo de a qué minijuego entra
@@ -10,6 +11,34 @@ public class GameManager : MonoBehaviour
     GameObject virus;
     GameObject monocito;
     GameObject neutrofilo;
+    int indiceEscena;
+
+    private void Start()
+    {
+        //Índice de escena actual buildeada
+        indiceEscena = SceneManager.GetActiveScene().buildIndex;
+    }
+
+    private void Update()
+    {
+        //Si se presiona el botón back se carga la escena del minimapa,
+        //si está en el minipa regresa a la pantalla inicial
+        //pero si está en la pantalla inicial, cierra el juego
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (indiceEscena != 0)
+            {
+                if(indiceEscena == 1)
+                    SceneManager.LoadScene(0);
+
+                else
+                    SceneManager.LoadScene(1);
+            }
+  
+            else
+                Application.Quit();
+        }    
+    }
 
     //Función que es llamada cuando se hace click en los botones del canvas
     //del minimapas
