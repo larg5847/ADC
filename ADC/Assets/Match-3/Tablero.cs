@@ -6,9 +6,12 @@ public class Tablero : MonoBehaviour
 {
     public int ancho;
     public int alto;
+    
     public GameObject tilePrefab;
     //Arreglo de prefabs de las distintas células a utilizar
     public GameObject[] celulas;
+    //Para objeto fuera del tablero
+    public int offset;
 
     //Arreglo bidimensional para posición de células
     public GameObject[,] tCelulas;
@@ -39,7 +42,7 @@ public class Tablero : MonoBehaviour
             for (int j = 0; j < alto; j++)
             {
                 //Posición en la malla
-                Vector2 posicion = new Vector2(i, j);
+                Vector2 posicion = new Vector2(i, j + offset);
                 //Selección al azar de la célula del arreglo celulas
                 int indiceCelula = Random.Range(0, celulas.Length);
                 int iteraciones = 0;
@@ -54,8 +57,15 @@ public class Tablero : MonoBehaviour
                     iteraciones++;
                 }
 
-                GameObject backgroundTile = Instantiate(tilePrefab, posicion, Quaternion.identity) as GameObject;
+                GameObject backgroundTile = Instantiate(tilePrefab, new Vector2(posicion.x, posicion.y - offset), 
+                    Quaternion.identity) as GameObject;
                 GameObject celula = Instantiate(celulas[indiceCelula], posicion, Quaternion.identity);
+
+                //Actualización de las células y tiles en el tablero, 
+                //debido a que tienen una posición incorrecta por el 
+                //offset
+                celula.GetComponent<Celula>().columna = i;
+                celula.GetComponent<Celula>().fila = j;
 
                 //Para instanciar los tiles como hijos de Tablero
                 backgroundTile.transform.parent = this.transform;
@@ -174,13 +184,18 @@ public class Tablero : MonoBehaviour
             {
                 if (tCelulas[i, j] == null)
                 {
-                    Vector2 posicion = new Vector2(i, j);
+                    Vector2 posicion = new Vector2(i, j + offset);
                     int indiceCelula = Random.Range(0, celulas.Length);
                     GameObject celula = Instantiate(celulas[indiceCelula], posicion, Quaternion.identity);
 
                     celula.transform.parent = this.transform;
                     celula.name = "(" + i + "," + j + ")";
                     tCelulas[i, j] = celula;
+
+                    //Actualización de las células en el tablero, debido a que tiene
+                    //una posición incorrecta por el offset
+                    celula.GetComponent<Celula>().columna = i;
+                    celula.GetComponent<Celula>().fila = j;
                 }
             }
         }

@@ -31,13 +31,13 @@ public class Celula : MonoBehaviour
         tablero = FindObjectOfType<Tablero>();
 
         //Posición de la célula
-        posX = (int)transform.position.x;
+        /*posX = (int)transform.position.x;
         posY = (int)transform.position.y;
 
         columna = posX;
         fila = posY;
         columnaAnterior = columna;
-        filaAnterior = fila;
+        filaAnterior = fila;*/
     }
 
     private void Update()
@@ -157,6 +157,8 @@ public class Celula : MonoBehaviour
         //Deslizamiento derecha
         if (anguloDeslizamiento > -15 && anguloDeslizamiento <= 15 && columna < tablero._ancho - 1)
         {
+            columnaAnterior = columna;
+            filaAnterior = fila;
             celula = tablero.tCelulas[columna + 1, fila];
             celula.GetComponent<Celula>().columna -= 1;
             columna += 1;
@@ -165,6 +167,8 @@ public class Celula : MonoBehaviour
         //Deslizamiento izquierda
         else if ((anguloDeslizamiento > 165 || anguloDeslizamiento <= -165) && columna > 0)
         {
+            columnaAnterior = columna;
+            filaAnterior = fila;
             celula = tablero.tCelulas[columna - 1, fila];
             celula.GetComponent<Celula>().columna += 1;
             columna -= 1;
@@ -173,6 +177,8 @@ public class Celula : MonoBehaviour
         //Deslizamiento arriba
         else if (anguloDeslizamiento > 75 && anguloDeslizamiento <= 105 && fila < tablero._alto - 1)
         {
+            columnaAnterior = columna;
+            filaAnterior = fila;
             celula = tablero.tCelulas[columna, fila + 1];
             celula.GetComponent<Celula>().fila -= 1;
             fila += 1;
@@ -181,6 +187,8 @@ public class Celula : MonoBehaviour
         //Deslizamiento abajo
         else if (anguloDeslizamiento >= -105 && anguloDeslizamiento < -75 && fila > 0)
         {
+            columnaAnterior = columna;
+            filaAnterior = fila;
             celula = tablero.tCelulas[columna, fila - 1];
             celula.GetComponent<Celula>().fila += 1;
             fila -= 1;

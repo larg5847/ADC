@@ -193,7 +193,7 @@ GameObject:
   - component: {fileID: 1645103847}
   m_Layer: 0
   m_Name: Tablero
-  m_TagString: Untagged
+  m_TagString: Monocito
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -218,6 +218,7 @@ MonoBehaviour:
   - {fileID: 6050353416232637807, guid: ccf0a1fc4cd937246ba14a7678702a12, type: 3}
   - {fileID: 2941478715189247493, guid: dd78544f784180446b0fd9485d8a38c3, type: 3}
   - {fileID: 5751482509960975320, guid: 6bcdbdf078d90a94f82be29cbf78345e, type: 3}
+  offset: 10
 --- !u!4 &1645103848
 Transform:
   m_ObjectHideFlags: 0
