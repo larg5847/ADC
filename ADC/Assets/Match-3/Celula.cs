@@ -25,10 +25,14 @@ public class Celula : MonoBehaviour
     //Variable para saber si hizo match
     public bool matched = false;
 
+    //Referencia al Script EncuentraMatches en lugar de hacerlo cada frame
+    EncuentraMatches encuentraMatches;
+
     private void Start()
     {
         //Encuentra objeto activo del tipo Tablero en escena
         tablero = FindObjectOfType<Tablero>();
+        encuentraMatches = FindObjectOfType<EncuentraMatches>();
 
         //Posición de la célula
         /*posX = (int)transform.position.x;
@@ -42,7 +46,7 @@ public class Celula : MonoBehaviour
 
     private void Update()
     {
-        encuentraMatches();
+        //encuentraMatches();
 
         if (matched)
         {
@@ -63,6 +67,8 @@ public class Celula : MonoBehaviour
             //Actualiza el objeto una vez que desciende la célula
             if (tablero.tCelulas[columna, fila] != this.gameObject)
                 tablero.tCelulas[columna, fila] = this.gameObject;
+
+            encuentraMatches.encuentraTodosLosMatches();
         }
 
         else
@@ -81,6 +87,8 @@ public class Celula : MonoBehaviour
             //Actualiza el objeto una vez que desciende la célula
             if (tablero.tCelulas[columna, fila] != this.gameObject)
                 tablero.tCelulas[columna, fila] = this.gameObject;
+            
+            encuentraMatches.encuentraTodosLosMatches();
         }
 
         else
@@ -107,12 +115,16 @@ public class Celula : MonoBehaviour
                 //originales
                 fila = filaAnterior;
                 columna = columnaAnterior;
+                /*yield return new WaitForSeconds(0.5f);
+                tablero.estadoActual = EstadoJuego.mueve;*/
             }
 
             else
                 tablero.destruyeMatches();
 
             celula = null;
+            /*yield return new WaitForSeconds(0.5f);
+            tablero.estadoActual = EstadoJuego.mueve;*/
         }
     }
 
@@ -120,13 +132,19 @@ public class Celula : MonoBehaviour
     //y se convierten esas posiciones de pantalla a espacio global
     private void OnMouseDown()
     {
-        posicionInicial = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        //if(tablero.estadoActual == EstadoJuego.mueve)
+        //{
+            posicionInicial = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        //}
     }
 
     private void OnMouseUp()
     {
-        posicionFinal = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        calculaAngulo();
+        //if(tablero.estadoActual == EstadoJuego.mueve)
+        //{
+            posicionFinal = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            calculaAngulo();
+        //}
     }
 
     //Por trigonometría se calcula el ángulo de deslizamiento (grados) 
@@ -145,6 +163,8 @@ public class Celula : MonoBehaviour
         {
             anguloDeslizamiento = Mathf.Atan2(limiteMovimiento.y,
                 limiteMovimiento.x) * 180 / Mathf.PI;
+
+            //tablero.estadoActual = EstadoJuego.espera;
 
             mueveCelulas();
         }
@@ -197,9 +217,10 @@ public class Celula : MonoBehaviour
         StartCoroutine(verificaMatch());
     }
 
+    //*****Se sustituye con el Script EncuentraMatches
     //Función que verifica si hay match en las células que tiene alrededor,
     //esto lo hace comparando por medio de etiquetas
-    private void encuentraMatches()
+    /*private void encuentraMatches()
     {
         if (columna > 0 && columna < tablero.ancho - 1)
         {
@@ -237,5 +258,5 @@ public class Celula : MonoBehaviour
                 }
             }
         }
-    }
+    }*/
 }

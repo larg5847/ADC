@@ -2,11 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//Estados de juego que sirven para evitar que el jugador
+//pueda hacer movimientos mientras aún existan matches en el tablero
+//mientras caen nuevas células
+//****Queda pendiente porque en algunas ocasiones se queda en espera
+/*public enum EstadoJuego
+{
+    espera,
+    mueve
+}*/
+
 public class Tablero : MonoBehaviour
 {
     public int ancho;
     public int alto;
-    
+
     public GameObject tilePrefab;
     //Arreglo de prefabs de las distintas células a utilizar
     public GameObject[] celulas;
@@ -19,14 +29,20 @@ public class Tablero : MonoBehaviour
     //
     BackgroundTile[,] tTiles;
 
+    //public EstadoJuego estadoActual = EstadoJuego.mueve;
+
+    EncuentraMatches encuentraMatches;
+
     public Tablero(int _alto, int _ancho)
     {
-        _alto = this.alto;
-        _ancho = this.ancho;
+        this.alto = _alto;
+        this.ancho = _ancho;
     }
 
     private void Start()
     {
+        encuentraMatches = FindObjectOfType<EncuentraMatches>();
+
         //
         tTiles = new BackgroundTile[ancho, alto];
         tCelulas = new GameObject[ancho, alto];
@@ -57,7 +73,7 @@ public class Tablero : MonoBehaviour
                     iteraciones++;
                 }
 
-                GameObject backgroundTile = Instantiate(tilePrefab, new Vector2(posicion.x, posicion.y - offset), 
+                GameObject backgroundTile = Instantiate(tilePrefab, new Vector2(posicion.x, posicion.y - offset),
                     Quaternion.identity) as GameObject;
                 GameObject celula = Instantiate(celulas[indiceCelula], posicion, Quaternion.identity);
 
@@ -121,6 +137,9 @@ public class Tablero : MonoBehaviour
     {
         if (tCelulas[columna, fila].GetComponent<Celula>().matched)
         {
+            //Elimina de la lista, ya que no se necesita para el conteo 
+            //total de los matches de las células destruidas
+            encuentraMatches.matchesActuales.Remove(tCelulas[columna, fila]);
             Destroy(tCelulas[columna, fila]);
             tCelulas[columna, fila] = null;
         }
@@ -178,9 +197,9 @@ public class Tablero : MonoBehaviour
     //nuevas células
     private void rellenaTablero()
     {
-        for(int i = 0; i < ancho; i++)
+        for (int i = 0; i < ancho; i++)
         {
-            for(int j = 0; j < alto; j++)
+            for (int j = 0; j < alto; j++)
             {
                 if (tCelulas[i, j] == null)
                 {
@@ -205,11 +224,11 @@ public class Tablero : MonoBehaviour
     //las células, retorna un 1 si hay match
     private bool matchesActual()
     {
-        for(int i = 0; i < ancho; i++)
+        for (int i = 0; i < ancho; i++)
         {
-            for(int j = 0; j < alto; j++)
+            for (int j = 0; j < alto; j++)
             {
-                if(tCelulas[i, j] != null)
+                if (tCelulas[i, j] != null)
                 {
                     if (tCelulas[i, j].GetComponent<Celula>().matched)
                         return true;
@@ -226,11 +245,16 @@ public class Tablero : MonoBehaviour
         rellenaTablero();
         yield return new WaitForSeconds(0.5f);
 
-        while(matchesActual())
+        //estadoActual = EstadoJuego.espera;
+
+        while (matchesActual())
         {
             yield return new WaitForSeconds(0.5f);
             destruyeMatches();
         }
+        /*
+        yield return new WaitForSeconds(0.5f);
+        estadoActual = EstadoJuego.mueve;*/
     }
 
     public int _alto
@@ -244,5 +268,10 @@ public class Tablero : MonoBehaviour
         get => ancho;
         set { alto = value; }
     }
-}
 
+    public GameObject[,] _tCelulas
+    {
+        get => tCelulas;
+        set { tCelulas = value; }
+    }
+}
