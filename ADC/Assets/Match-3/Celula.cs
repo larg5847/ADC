@@ -28,11 +28,14 @@ public class Celula : MonoBehaviour
     //Referencia al Script EncuentraMatches en lugar de hacerlo cada frame
     EncuentraMatches encuentraMatches;
 
+    Animator animatorCelula;
+
     private void Start()
     {
         //Encuentra objeto activo del tipo Tablero en escena
         tablero = FindObjectOfType<Tablero>();
         encuentraMatches = FindObjectOfType<EncuentraMatches>();
+        animatorCelula = GetComponent<Animator>();
 
         //Posición de la célula
         /*posX = (int)transform.position.x;
@@ -50,8 +53,10 @@ public class Celula : MonoBehaviour
 
         if (matched)
         {
-            SpriteRenderer sprite = GetComponent<SpriteRenderer>();
-            sprite.color = new Color(0f, 0f, 0f, 0.2f);
+            //Activa animación de explosión
+            animatorCelula.SetBool("Destruccion", true);
+            //SpriteRenderer sprite = GetComponent<SpriteRenderer>();
+            //sprite.color = new Color(0f, 0f, 0f, 0.2f);
         }
 
         posX = columna;
