@@ -32,6 +32,7 @@ public class Tablero : MonoBehaviour
     //public EstadoJuego estadoActual = EstadoJuego.mueve;
 
     EncuentraMatches encuentraMatches;
+    public Celula celulaActual;
 
     public Tablero(int _alto, int _ancho)
     {
@@ -139,9 +140,17 @@ public class Tablero : MonoBehaviour
         {
             //Elimina de la lista, ya que no se necesita para el conteo 
             //total de los matches de las células destruidas
+            if(encuentraMatches.matchesActuales.Count >= 4)
+            {
+                encuentraMatches.verificaBombas();
+            }
+
             encuentraMatches.matchesActuales.Remove(tCelulas[columna, fila]);
             Destroy(tCelulas[columna, fila]);
             tCelulas[columna, fila] = null;
+            //Deja vacía la célula actual(después de realizar el
+            //movimiento)
+            celulaActual = null;
         }
     }
 
@@ -252,6 +261,10 @@ public class Tablero : MonoBehaviour
             yield return new WaitForSeconds(0.5f);
             destruyeMatches();
         }
+
+        //Para borrar de la lista aquellas células que se convirtieron en
+        //powerup
+        encuentraMatches.matchesActuales.Clear();
         /*
         yield return new WaitForSeconds(0.5f);
         estadoActual = EstadoJuego.mueve;*/

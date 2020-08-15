@@ -16,17 +16,22 @@ public class Celula : MonoBehaviour
     //Variable para referenciar a la célula de a lado
     GameObject celula;
 
+    [Header("Variables de deslizamiento")]
     //Parámetros necesarios para obtener el ángulo de deslizamiento
     Vector2 posicionInicial;
     Vector2 posicionFinal;
     Vector2 posicionTemp;
     public float anguloDeslizamiento = 0;
 
+    [Header("Variables del match")]
     //Variable para saber si hizo match
     public bool matched = false;
-
     //Referencia al Script EncuentraMatches en lugar de hacerlo cada frame
     EncuentraMatches encuentraMatches;
+
+    [Header("Variables para los powerups")]
+    public bool bombaColumna;
+    public bool bombaFila;
 
     Animator animatorCelula;
 
@@ -37,6 +42,8 @@ public class Celula : MonoBehaviour
         encuentraMatches = FindObjectOfType<EncuentraMatches>();
         animatorCelula = GetComponent<Animator>();
 
+        bombaColumna = false;
+        bombaFila = false;
         //Posición de la célula
         /*posX = (int)transform.position.x;
         posY = (int)transform.position.y;
@@ -120,6 +127,7 @@ public class Celula : MonoBehaviour
                 //originales
                 fila = filaAnterior;
                 columna = columnaAnterior;
+                tablero.celulaActual = null;
                 /*yield return new WaitForSeconds(0.5f);
                 tablero.estadoActual = EstadoJuego.mueve;*/
             }
@@ -127,7 +135,7 @@ public class Celula : MonoBehaviour
             else
                 tablero.destruyeMatches();
 
-            celula = null;
+            //celula = null;
             /*yield return new WaitForSeconds(0.5f);
             tablero.estadoActual = EstadoJuego.mueve;*/
         }
@@ -172,6 +180,7 @@ public class Celula : MonoBehaviour
             //tablero.estadoActual = EstadoJuego.espera;
 
             mueveCelulas();
+            tablero.celulaActual = this;
         }
     }
 
@@ -264,4 +273,20 @@ public class Celula : MonoBehaviour
             }
         }
     }*/
+
+    public void creaBombaFila()
+    {
+        bombaFila = true;
+    }
+
+    public void creaBombaColumna()
+    {
+        bombaColumna = true;
+    }
+
+    public GameObject _celula
+    {
+        get => celula;
+        set { celula = value; }
+    }
 }
