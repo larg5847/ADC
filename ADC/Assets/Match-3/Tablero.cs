@@ -95,6 +95,8 @@ public class Tablero : MonoBehaviour
                 tCelulas[i, j] = celula;
             }
         }
+
+        Debug.Log(encuentraMatches.encuentraPosiblesMatches());
     }
 
     //Función que no deja que existan matches al momento de llenar
@@ -268,6 +270,8 @@ public class Tablero : MonoBehaviour
         /*
         yield return new WaitForSeconds(0.5f);
         estadoActual = EstadoJuego.mueve;*/
+        //if(estadoActual == EstadoJuego.mueve)
+        //Debug.Log(encuentraMatches.encuentraPosiblesMatches());
     }
 
     public int _alto

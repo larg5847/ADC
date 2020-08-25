@@ -9,6 +9,10 @@ TagManager:
   - Monocito
   - MonocitoCaida
   - Adenovirus
+  - CelulaPrueba1
+  - CelulaPrueba2
+  - CelulaPrueba3
+  - CelulaPrueba4
   layers:
   - Default
   - TransparentFX

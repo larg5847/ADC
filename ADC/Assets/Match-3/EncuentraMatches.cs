@@ -127,6 +127,204 @@ public class EncuentraMatches : MonoBehaviour
         }
     }
 
+    //Encuentra todos los posibles matches en el tablero
+    public bool encuentraPosiblesMatches()
+    {
+        //i = 3; i < tablero._ancho - 3
+        for(int i = 0; i < tablero._ancho; i++)
+        {
+            for(int j = 0; j < tablero._alto; j++)
+            {
+                GameObject celulaActual = tablero._tCelulas[i, j];
+
+                if(celulaActual != null)
+                {
+                    //Comparación de células ubicadas en las esquinas
+                    //Lado izquierdo
+                    //Caso 1:
+                    //        *
+                    //          *
+                    //        *
+                    if(i > 0 && j > 0 && j < tablero._alto - 1)
+                    {
+                        if (tablero._tCelulas[i - 1, j - 1] != null
+                            && tablero._tCelulas[i - 1, j + 1] != null)
+                            if (tablero._tCelulas[i - 1, j - 1].tag == celulaActual.tag
+                                && tablero._tCelulas[i - 1, j + 1].tag == celulaActual.tag)
+                                return true;
+                    }
+                    
+                    //Caso 2: 
+                    //          *
+                    //        *
+                    //        *
+                    if(i > 0 && j > 1)
+                    {
+                        if(tablero._tCelulas[i - 1, j - 1] != null
+                            &&tablero._tCelulas[i - 1, j - 2] != null)
+                            if (tablero._tCelulas[i - 1, j - 1].tag == celulaActual.tag
+                                && tablero._tCelulas[i - 1, j - 2].tag == celulaActual.tag)
+                                return true;
+                    }
+
+                    //Caso 3:
+                    //            *
+                    //        * *
+                    if(i > 1 && j > 0)
+                    {
+                        if(tablero._tCelulas[i - 1, j - 1] != null
+                            && tablero._tCelulas[i - 2, j - 1] != null)
+                            if (tablero._tCelulas[i - 1, j - 1].tag == celulaActual.tag
+                                && tablero._tCelulas[i - 2, j - 1].tag == celulaActual.tag)
+                                return true;
+                    }
+
+                    //Caso 4:
+                    //        *
+                    //        *
+                    //          *
+                    if(i > 0 && j < tablero._alto - 2)
+                    {
+                        if (tablero._tCelulas[i - 1, j + 1] != null
+                            && tablero._tCelulas[i - 1, j + 2] != null)
+                            if (tablero._tCelulas[i - 1, j + 1].tag == celulaActual.tag
+                                && tablero._tCelulas[i - 1, j + 2].tag == celulaActual.tag)
+                                return true;
+                    }
+                    
+                    //Caso 5:
+                    //       * *
+                    //           *
+                    if(i > 1 && j < tablero._alto - 1)
+                    {
+                        if(tablero._tCelulas[i - 1, j + 1] != null
+                            && tablero._tCelulas[i - 2, j + 1] != null)
+                            if (tablero._tCelulas[i - 1, j + 1].tag == celulaActual.tag
+                                && tablero._tCelulas[i - 2, j + 1].tag == celulaActual.tag)
+                                return true;
+                    }
+
+                    //Lado derecho
+                    //Caso 6:
+                    //          *
+                    //        *
+                    //          *
+                    if(i < tablero._ancho - 1 && j > 0 && j < tablero._alto - 1)
+                    {
+                        if (tablero._tCelulas[i + 1, j - 1] != null
+                            && tablero._tCelulas[i + 1, j + 1] != null)
+                            if (tablero._tCelulas[i + 1, j - 1].tag == celulaActual.tag
+                                && tablero._tCelulas[i + 1, j + 1].tag == celulaActual.tag)
+                                return true;
+                    }
+
+                    //Caso 7:
+                    //        *
+                    //          *
+                    //          *
+                    if(i < tablero._ancho - 1 && j > 1)
+                    {
+                        if (tablero._tCelulas[i + 1, j - 1] != null
+                            && tablero._tCelulas[i + 1, j - 2] != null)
+                            if (tablero._tCelulas[i + 1, j - 1].tag == celulaActual.tag
+                                && tablero._tCelulas[i + 1, j - 2].tag == celulaActual.tag)
+                                return true;
+                    }
+
+                    //Caso 8:
+                    //        *
+                    //          * *
+                    if(i < tablero._ancho - 2 && j > 0)
+                    {
+                        if (tablero._tCelulas[i + 1, j - 1] != null
+                            && tablero._tCelulas[i + 2, j - 1] != null)
+                        {
+                            if (tablero._tCelulas[i + 1, j - 1].tag == celulaActual.tag
+                                && tablero._tCelulas[i + 2, j - 1].tag == celulaActual.tag)
+                                return true;
+                        }
+                    }
+
+                    //Caso 9:
+                    //          *
+                    //          *
+                    //        *
+                    if(i < tablero._ancho - 1 && j < tablero._alto - 2)
+                    {
+                        if (tablero._tCelulas[i + 1, j + 1] != null
+                            && tablero._tCelulas[i + 1, j + 2] != null)
+                            if (tablero._tCelulas[i + 1, j + 1].tag == celulaActual.tag
+                                && tablero._tCelulas[i + 1, j + 2].tag == celulaActual.tag)
+                                return true;
+                    }
+                    
+                    //Caso 10:
+                    //           * *
+                    //         *
+                    if(i < tablero._ancho - 2 && j < tablero._alto - 1)
+                    {
+                        if (tablero._tCelulas[i + 1, j + 1] != null
+                            && tablero._tCelulas[i + 2, j + 1] != null)
+                            if (tablero._tCelulas[i + 1, j + 1].tag == celulaActual.tag
+                                && tablero._tCelulas[i + 2, j + 1].tag == celulaActual.tag)
+                                return true;
+                    }
+
+                    //Caso 11: Derecha
+                    //         *   * *
+                    if(i < tablero._ancho - 3)
+                    {
+                        if (tablero._tCelulas[i + 2, j] != null
+                        && tablero._tCelulas[i + 3, j] != null)
+                            if (tablero._tCelulas[i + 2, j].tag == celulaActual.tag
+                                && tablero._tCelulas[i + 3, j].tag == celulaActual.tag)
+                                return true;
+                    }
+                
+                    //Caso 12: Izquierda
+                    //          * *   *
+                    if(i > 2)
+                    {
+                        if (tablero._tCelulas[i - 2, j] != null
+                        && tablero._tCelulas[i - 3, j] != null)
+                            if (tablero._tCelulas[i - 2, j].tag == celulaActual.tag
+                                && tablero._tCelulas[i - 3, j].tag == celulaActual.tag)
+                                return true;
+                    }
+                    
+                    //Caso 13: Arriba
+                    //          *
+                    //          *
+                    //          
+                    //          *
+                    if(j < tablero._alto - 3)
+                    {
+                        if (tablero._tCelulas[i, j + 2] != null
+                        && tablero._tCelulas[i, j + 3] != null)
+                            if (tablero._tCelulas[i, j + 2].tag == celulaActual.tag
+                                && tablero._tCelulas[i, j + 3].tag == celulaActual.tag)
+                                return true;
+                    }
+
+                    //Caso 14: Abajo
+                    //          *
+                    //
+                    //          *
+                    //          *
+                    if(j > 2)
+                    {
+                        if (tablero._tCelulas[i, j - 2] != null
+                        && tablero._tCelulas[i, j - 3] != null)
+                            if (tablero._tCelulas[i, j - 2].tag == celulaActual.tag
+                                && tablero._tCelulas[i, j - 3].tag == celulaActual.tag)
+                                return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
     //Método para la creación de una lista que contenga a todos los
     //gameobjects de una columna
     List<GameObject> obtieneCelulasColumna(int columna)
