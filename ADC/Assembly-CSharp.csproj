@@ -77,6 +77,7 @@
     <Compile Include="Assets\scripts\MonocitoComportamiento.cs" />
     <Compile Include="Assets\scripts\movimientoJugador.cs" />
     <Compile Include="Assets\scripts\NeutrofiloComportamiento.cs" />
+    <Compile Include="Assets\scripts\Puntaje.cs" />
     <Compile Include="Assets\scripts\SceneFader.cs" />
     <Compile Include="Assets\scripts\scriptsPrototipos\multiItemPools.cs" />
     <Compile Include="Assets\scripts\SelectorMiniJuego.cs" />

@@ -142,7 +142,7 @@ public class Tablero : MonoBehaviour
         {
             //Elimina de la lista, ya que no se necesita para el conteo 
             //total de los matches de las células destruidas
-            if(encuentraMatches.matchesActuales.Count >= 4)
+            if (encuentraMatches.matchesActuales.Count >= 4)
             {
                 encuentraMatches.verificaBombas();
             }

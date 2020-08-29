@@ -9,12 +9,14 @@ using System.Linq;
 public class EncuentraMatches : MonoBehaviour
 {
     Tablero tablero;
+    Puntaje puntaje;
 
     public List<GameObject> matchesActuales = new List<GameObject>();
 
     void Start()
     {
         tablero = FindObjectOfType<Tablero>();
+        puntaje = FindObjectOfType<Puntaje>();
     }
 
     public void encuentraTodosLosMatches()
@@ -27,9 +29,10 @@ public class EncuentraMatches : MonoBehaviour
     //realizar una máquina de estados sobre qué powerups crear
     void agregaMatchesActuales(GameObject celula)
     {
-        if(!matchesActuales.Contains(celula))
+        if (!matchesActuales.Contains(celula))
         {
             matchesActuales.Add(celula);
+            puntaje.AumentaPuntos(1);
         }
     }
 
