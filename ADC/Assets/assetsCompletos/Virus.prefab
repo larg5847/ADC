@@ -144,6 +144,8 @@ MonoBehaviour:
   posY: 0
   anguloDeslizamiento: 0
   matched: 0
+  bombaColumna: 0
+  bombaFila: 0
 --- !u!114 &5751482509960975330
 MonoBehaviour:
   m_ObjectHideFlags: 0

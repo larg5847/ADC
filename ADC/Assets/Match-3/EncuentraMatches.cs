@@ -370,9 +370,9 @@ public class EncuentraMatches : MonoBehaviour
     {
         //Primero se verifica que se hayan movido las células en el tablero
         //Checa si hizo match la célula seleccionada o la que tiene a un lado
-        if(tablero.celulaActual != null)
+        if (tablero.celulaActual != null)
         {
-            if(tablero.celulaActual.matched)
+            if (tablero.celulaActual.matched)
             {
                 tablero.celulaActual.matched = false;
                 /*
@@ -407,11 +407,11 @@ public class EncuentraMatches : MonoBehaviour
 
             //Para la célula de al lado, en caso de que se haya seleccionado la que en
             //sí no hace match pero la que se intercambia sí y no se vea afectado por ello
-            else if(tablero.celulaActual._celula != null)
+            else if (tablero.celulaActual._celula != null)
             {
                 Celula celula = tablero.celulaActual._celula.GetComponent<Celula>();
 
-                if(celula.matched)
+                if (celula.matched)
                 {
                     celula.matched = false;
                     /*
@@ -441,6 +441,27 @@ public class EncuentraMatches : MonoBehaviour
 
                     else
                         celula.creaBombaColumna();
+                }
+            }
+        }
+    }
+
+    //Se pasa la etiqueta de la célula para poner la variable
+    //match en true de todas las células que se encuentren en el
+    //tablero con dicha etiqueta (sería el powerUp que elimina
+    //el mismo tipo de gameobject)
+    public void CelulasMatchPorTipo(string etiquetaCelula)
+    {
+        for(int i = 0; i < tablero._ancho; i++)
+        {
+            for(int j = 0; j < tablero._alto; j++)
+            {
+                if(tablero._tCelulas[i, j] != null)
+                {
+                    if(tablero._tCelulas[i, j].tag == etiquetaCelula)
+                    {
+                        tablero._tCelulas[i, j].GetComponent<Celula>().matched = true;
+                    }
                 }
             }
         }

@@ -29,4 +29,10 @@ public class Puntaje : MonoBehaviour
 
         puntajeText.text = puntaje.ToString();
     }
+
+    public int _puntaje
+    { 
+        get => puntaje; 
+        set => puntaje = value; 
+    }
 }
