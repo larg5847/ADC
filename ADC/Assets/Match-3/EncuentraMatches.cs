@@ -366,7 +366,7 @@ public class EncuentraMatches : MonoBehaviour
 
     //Método que checa si existe lo necesario para crear una bomba
     //ya sea para eliminar una fila o columna
-    public void verificaBombas()
+    public void CrearBombas()
     {
         //Primero se verifica que se hayan movido las células en el tablero
         //Checa si hizo match la célula seleccionada o la que tiene a un lado
@@ -375,6 +375,7 @@ public class EncuentraMatches : MonoBehaviour
             if(tablero.celulaActual.matched)
             {
                 tablero.celulaActual.matched = false;
+                /*
                 int tipoBomba = Random.Range(0, 1);
                 
                 //Bomba fila
@@ -388,6 +389,20 @@ public class EncuentraMatches : MonoBehaviour
                 {
                     tablero.celulaActual.creaBombaColumna();
                 }
+                */
+
+                //UPDATE: Para no hacerlo random, y mejor crear
+                //las bombas dependiendo de hacia dónde se movió
+                //la célula para hacer match
+                if ((tablero.celulaActual.anguloDeslizamiento > -15
+                    && tablero.celulaActual.anguloDeslizamiento <= 15)
+                    || (tablero.celulaActual.anguloDeslizamiento > 165
+                    || tablero.celulaActual.anguloDeslizamiento <= -165))
+                    tablero.celulaActual.creaBombaFila();
+
+                else
+                    tablero.celulaActual.creaBombaColumna();
+
             }
 
             //Para la célula de al lado, en caso de que se haya seleccionado la que en
@@ -399,6 +414,7 @@ public class EncuentraMatches : MonoBehaviour
                 if(celula.matched)
                 {
                     celula.matched = false;
+                    /*
                     int tipoBomba = Random.Range(0, 1);
 
                     //Bomba fila
@@ -412,6 +428,19 @@ public class EncuentraMatches : MonoBehaviour
                     {
                         celula.creaBombaColumna();
                     }
+                    */
+
+                    //UPDATE: Para no hacerlo random, y mejor crear
+                    //las bombas dependiendo de hacia dónde se movió
+                    //la célula para hacer match
+                    if ((tablero.celulaActual.anguloDeslizamiento > -15
+                    && tablero.celulaActual.anguloDeslizamiento <= 15)
+                    || (tablero.celulaActual.anguloDeslizamiento > 165
+                    || tablero.celulaActual.anguloDeslizamiento <= -165))
+                        celula.creaBombaFila();
+
+                    else
+                        celula.creaBombaColumna();
                 }
             }
         }

@@ -505,10 +505,6 @@ MonoBehaviour:
   - {fileID: 6050353416232637807, guid: ccf0a1fc4cd937246ba14a7678702a12, type: 3}
   - {fileID: 2941478715189247493, guid: dd78544f784180446b0fd9485d8a38c3, type: 3}
   - {fileID: 5751482509960975320, guid: 6bcdbdf078d90a94f82be29cbf78345e, type: 3}
-  - {fileID: 2980277102922992401, guid: 936f367d062f5924f95f3b97efd85bdb, type: 3}
-  - {fileID: 4938032721555791869, guid: 7b61f79f36dddc04ba5b8d2f093236b0, type: 3}
-  - {fileID: 3506502439573777443, guid: 61dc71bf113bb244d88374e0fbb5593b, type: 3}
-  - {fileID: 2249243758620712327, guid: 86f147f78f07a8745a4751121867cad1, type: 3}
   offset: 10
   celulaActual: {fileID: 0}
 --- !u!4 &1645103848

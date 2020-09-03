@@ -144,7 +144,7 @@ public class Tablero : MonoBehaviour
             //total de los matches de las células destruidas
             if (encuentraMatches.matchesActuales.Count >= 4)
             {
-                encuentraMatches.verificaBombas();
+                encuentraMatches.CrearBombas();
             }
 
             encuentraMatches.matchesActuales.Remove(tCelulas[columna, fila]);
