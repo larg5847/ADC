@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab9b60c86c44a9d47b541d987620d857, type: 3}
+  m_Name: Nivel01
+  m_EditorClassIdentifier: 
+  nombreNivel: Nivel01
+  ancho: 4
+  alto: 7
+  prefabs:
+  - tipoPrefab: 1
+    prefab: {fileID: 6050353416232637807, guid: ccf0a1fc4cd937246ba14a7678702a12,
+      type: 3}
+  - tipoPrefab: 2
+    prefab: {fileID: 2941478715189247493, guid: dd78544f784180446b0fd9485d8a38c3,
+      type: 3}
+  - tipoPrefab: 3
+    prefab: {fileID: 5751482509960975320, guid: 6bcdbdf078d90a94f82be29cbf78345e,
+      type: 3}

@@ -498,14 +498,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc580594e80417c48909fdd7820de140, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ancho: 4
-  alto: 7
+  nivelMatch: {fileID: 11400000, guid: ef26724c3df084c4490dd130f645e311, type: 2}
+  ancho: 0
+  alto: 0
   tilePrefab: {fileID: 1443273526674174276, guid: aad5dfbc9eb287f4b886367e014d7f5f,
     type: 3}
-  celulas:
-  - {fileID: 6050353416232637807, guid: ccf0a1fc4cd937246ba14a7678702a12, type: 3}
-  - {fileID: 2941478715189247493, guid: dd78544f784180446b0fd9485d8a38c3, type: 3}
-  - {fileID: 5751482509960975320, guid: 6bcdbdf078d90a94f82be29cbf78345e, type: 3}
   offset: 10
   celulaActual: {fileID: 0}
 --- !u!4 &1645103848

@@ -14,12 +14,15 @@ using UnityEngine;
 
 public class Tablero : MonoBehaviour
 {
-    public int ancho;
-    public int alto;
+    public NivelMatch nivelMatch;
+    [SerializeField] private int ancho;
+    [SerializeField] private int alto;
 
     public GameObject tilePrefab;
     //Arreglo de prefabs de las distintas células a utilizar
-    public GameObject[] celulas;
+    //public GameObject[] celulas;
+    //Diccionario que sustituye al arreglo de los prefabs
+    private Dictionary<NivelMatch.TipoPrefab, GameObject> prefabsDic;
     //Para objeto fuera del tablero
     public int offset;
 
@@ -42,6 +45,21 @@ public class Tablero : MonoBehaviour
 
     private void Start()
     {
+        alto = nivelMatch.alto;
+        ancho = nivelMatch.ancho;
+
+        prefabsDic = new Dictionary<NivelMatch.TipoPrefab, GameObject>();
+
+        //Se agrega al diccionario los tipos de los prefabs y sus
+        //prefabs que contiene el nivel
+        for (int i = 0; i < nivelMatch.prefabs.Length; i++)
+        {
+            if (!prefabsDic.ContainsKey(nivelMatch.prefabs[i].tipoPrefab))
+            {
+                prefabsDic.Add(nivelMatch.prefabs[i].tipoPrefab, nivelMatch.prefabs[i].prefab);
+            }
+        }
+
         encuentraMatches = FindObjectOfType<EncuentraMatches>();
 
         //
@@ -54,29 +72,66 @@ public class Tablero : MonoBehaviour
     //Inicializa el tablero llenando cada posición con una célula
     private void llenaTablero()
     {
+        Dictionary<NivelMatch.TipoPrefab, GameObject>.KeyCollection tipoPrefabs =
+                    prefabsDic.Keys;
+
+        //Se crea una lista de TipoPrefab para poder elegir de forma 
+        //random un valor del diccionario
+        List<NivelMatch.TipoPrefab> tipoPrefabsList = new List<NivelMatch.TipoPrefab>();
+
+        foreach (NivelMatch.TipoPrefab t in tipoPrefabs)
+        {
+            tipoPrefabsList.Add(t);
+        }
+
+        NivelMatch.TipoPrefab[] previoIzquierda = new NivelMatch.TipoPrefab[alto];
+        NivelMatch.TipoPrefab previoAbajo;
+
         for (int i = 0; i < ancho; i++)
         {
+            previoAbajo = NivelMatch.TipoPrefab.VACIO;
+
             for (int j = 0; j < alto; j++)
             {
                 //Posición en la malla
                 Vector2 posicion = new Vector2(i, j + offset);
                 //Selección al azar de la célula del arreglo celulas
-                int indiceCelula = Random.Range(0, celulas.Length);
-                int iteraciones = 0;
+                //int indiceCelula = Random.Range(0, celulas.Length);
+
+                //Para que los prefabs no se repitan se descartan en una lista
+                //los que ocasionarían un match
+                List<NivelMatch.TipoPrefab> posiblesPrefabs = new List<NivelMatch.TipoPrefab>();
+                
+                posiblesPrefabs.AddRange(tipoPrefabsList);
+                posiblesPrefabs.Remove(previoIzquierda[j]);
+                posiblesPrefabs.Remove(previoAbajo);
+
+                //Selección al azar de la lista
+                int indiceCelula = Random.Range(0, posiblesPrefabs.Count);
+
+                //Se actualiza el arreglo de previoIzquierda y previoAbajo
+                //para no repetir prefabs
+                previoIzquierda[j] = posiblesPrefabs[indiceCelula];
+                previoAbajo = posiblesPrefabs[indiceCelula];
+
+                //UPDATE: No se necesita para las iteraciones ya que se utiliza otro
+                //algoritmo para que no existan matches en el tablero
+
+                //int iteraciones = 0;
 
                 //Iteración que cambia la célula a poner para que no exista
                 //match en el tablero al momento de llenarlo
                 //Máximo de 100 iteraciones para que no entre en un loop
                 //infinito
-                while (matches(i, j, celulas[indiceCelula]) && iteraciones < 100)
+                /*while (matches(i, j, celulas[indiceCelula]) && iteraciones < 100)
                 {
                     indiceCelula = Random.Range(0, celulas.Length);
                     iteraciones++;
-                }
+                }*/
 
                 GameObject backgroundTile = Instantiate(tilePrefab, new Vector2(posicion.x, posicion.y - offset),
                     Quaternion.identity) as GameObject;
-                GameObject celula = Instantiate(celulas[indiceCelula], posicion, Quaternion.identity);
+                GameObject celula = Instantiate(prefabsDic[posiblesPrefabs[indiceCelula]], posicion, Quaternion.identity);
 
                 //Actualización de las células y tiles en el tablero, 
                 //debido a que tienen una posición incorrecta por el 
@@ -99,9 +154,12 @@ public class Tablero : MonoBehaviour
         Debug.Log(encuentraMatches.encuentraPosiblesMatches());
     }
 
+    //UPDATE: No se necesita para las iteraciones ya que se utiliza otro
+    //algoritmo para que no existan matches en el tablero
+
     //Función que no deja que existan matches al momento de llenar
     //el tablero, regresa un true si hay match
-    private bool matches(int columna, int fila, GameObject celula)
+    /*private bool matches(int columna, int fila, GameObject celula)
     {
         //Comparación de la tercera fila y columna en adelante
         if (columna > 1 && fila > 1)
@@ -133,7 +191,7 @@ public class Tablero : MonoBehaviour
             }
         }
         return false;
-    }
+    }*/
 
     //Función que destruye la célula que hizo match
     private void destruyeMatches(int columna, int fila)
@@ -208,6 +266,18 @@ public class Tablero : MonoBehaviour
     //nuevas células
     private void rellenaTablero()
     {
+        Dictionary<NivelMatch.TipoPrefab, GameObject>.KeyCollection tipoPrefabs =
+                    prefabsDic.Keys;
+
+        //Se crea una lista de TipoPrefab para poder elegir de forma 
+        //random un valor del diccionario
+        List<NivelMatch.TipoPrefab> tipoPrefabsList = new List<NivelMatch.TipoPrefab>();
+
+        foreach (NivelMatch.TipoPrefab t in tipoPrefabs)
+        {
+            tipoPrefabsList.Add(t);
+        }
+
         for (int i = 0; i < ancho; i++)
         {
             for (int j = 0; j < alto; j++)
@@ -215,8 +285,10 @@ public class Tablero : MonoBehaviour
                 if (tCelulas[i, j] == null)
                 {
                     Vector2 posicion = new Vector2(i, j + offset);
-                    int indiceCelula = Random.Range(0, celulas.Length);
-                    GameObject celula = Instantiate(celulas[indiceCelula], posicion, Quaternion.identity);
+                    //int indiceCelula = Random.Range(0, celulas.Length);
+                    //GameObject celula = Instantiate(celulas[indiceCelula], posicion, Quaternion.identity);
+                    int indiceCelula = Random.Range(0, tipoPrefabsList.Count);
+                    GameObject celula = Instantiate(prefabsDic[tipoPrefabsList[indiceCelula]], posicion, Quaternion.identity);
 
                     celula.transform.parent = this.transform;
                     celula.name = "(" + i + "," + j + ")";
