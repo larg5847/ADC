@@ -40,8 +40,6 @@ public class EncuentraMatches : MonoBehaviour
     //esto lo hace comparando por medio de etiquetas
     IEnumerator encuentraTodosLosMatchesCo()
     {
-        yield return new WaitForSeconds(0.2f);
-
         for(int i = 0; i < tablero._ancho; i++)
         {
             for(int j = 0; j < tablero._alto; j++)
@@ -128,6 +126,7 @@ public class EncuentraMatches : MonoBehaviour
                 }
             }
         }
+        yield return new WaitForSeconds(0.1f);
     }
 
     //Encuentra todos los posibles matches en el tablero

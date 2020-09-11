@@ -18,4 +18,5 @@ public class NivelMatch : ScriptableObject
     public int ancho;
     public int alto;
     public Prefabs[] prefabs;
+    public Prefabs[] powerUps;
 }

@@ -34,9 +34,12 @@ public class Celula : MonoBehaviour
     public bool bombaFila;
 
     Animator animatorCelula;
+    SpriteRenderer spriteRenderer;
 
     private void Start()
     {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+
         //Encuentra objeto activo del tipo Tablero en escena
         tablero = FindObjectOfType<Tablero>();
         encuentraMatches = FindObjectOfType<EncuentraMatches>();
@@ -62,8 +65,7 @@ public class Celula : MonoBehaviour
         {
             //Activa animación de explosión
             animatorCelula.SetBool("Destruccion", true);
-            //SpriteRenderer sprite = GetComponent<SpriteRenderer>();
-            //sprite.color = new Color(0f, 0f, 0f, 0.2f);
+            
         }
 
         posX = columna;
@@ -113,7 +115,7 @@ public class Celula : MonoBehaviour
     //Corutina que checa si se hizo match
     public IEnumerator verificaMatch()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.8f);
 
         if (celula != null)
         {
@@ -277,11 +279,15 @@ public class Celula : MonoBehaviour
     public void creaBombaFila()
     {
         bombaFila = true;
+        animatorCelula.SetBool("Destruccion", false);
+        spriteRenderer.color = Color.red;
     }
 
     public void creaBombaColumna()
     {
         bombaColumna = true;
+        animatorCelula.SetBool("Destruccion", false);
+        spriteRenderer.color = Color.yellow;
     }
 
     public GameObject _celula
