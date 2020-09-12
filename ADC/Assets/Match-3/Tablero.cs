@@ -256,7 +256,7 @@ public class Tablero : MonoBehaviour
 
             contadorNull = 0;
         }
-        yield return new WaitForSeconds(0.4f);
+        yield return new WaitForSeconds(0.3f);
 
         StartCoroutine(rellenaTableroCo());
     }
@@ -326,13 +326,13 @@ public class Tablero : MonoBehaviour
     private IEnumerator rellenaTableroCo()
     {
         rellenaTablero();
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.1f);
 
         //estadoActual = EstadoJuego.espera;
 
         while (matchesActual())
         {
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.2f);
             destruyeMatches();
         }
 

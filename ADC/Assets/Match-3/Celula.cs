@@ -115,7 +115,7 @@ public class Celula : MonoBehaviour
     //Corutina que checa si se hizo match
     public IEnumerator verificaMatch()
     {
-        yield return new WaitForSeconds(0.8f);
+        yield return new WaitForSeconds(0.4f);
 
         if (celula != null)
         {
