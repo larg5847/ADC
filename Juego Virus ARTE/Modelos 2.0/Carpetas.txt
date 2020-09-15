@@ -1,0 +1,9 @@
+irvin usa paquetes 
+   sus paquetes van por separado
+
+salgado 
+   carpeta "match3" para codigo
+   scene "match 3" para pruebas
+   carpeta assets pruebas
+
+		
